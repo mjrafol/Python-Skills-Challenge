@@ -71,22 +71,22 @@ print("----------------------------")
 # Winner.
 print(f"Winner: {max(election_results, key=election_results.get)}")
 
-# Set path for the output csv file.
-output_path = os.path.join('Analysis','PyPoll_output.csv')
 
-# Export a text file with the analysis table.
-with open (output_path,'w') as csvoutput:
+# Create a list for the analysis result requirements to be printed in output text file.
+output_lines = ["Election Results", 
+    "----------------------------", 
+    f"Total Votes: {int(len(ballot))}", 
+    "----------------------------",
+    f"{candidates[0]} : {round((counter_c1/(int(len(ballot)))*100),3)}% ({counter_c1})",
+    f"{candidates[1]} : {round((counter_c2/(int(len(ballot)))*100),3)}% ({counter_c2})",
+    f"{candidates[2]} : {round((counter_c3/(int(len(ballot)))*100),3)}% ({counter_c3})",
+    "----------------------------",
+    f"Winner: {max(election_results, key=election_results.get)}"]
 
-    # Initialize csvoutput writer.
-    csvwriter = csv.writer(csvoutput,delimiter=',')
+# Export a text file with the analysis results in designated path.
+with open (os.path.join('Analysis','PyPoll_output.txt'),'w') as txtoutput:
 
     # Write the analysis results.
-    csvwriter.writerow(["Election Results"])
-    csvwriter.writerow(["----------------------------"])
-    csvwriter.writerow([f"Total Votes: {int(len(ballot))}"])
-    csvwriter.writerow(["----------------------------"])
-    csvwriter.writerow([f"{candidates[0]} : {round((counter_c1/(int(len(ballot)))*100),3)}% ({counter_c1})"])
-    csvwriter.writerow([f"{candidates[1]} : {round((counter_c2/(int(len(ballot)))*100),3)}% ({counter_c2})"])
-    csvwriter.writerow([f"{candidates[2]} : {round((counter_c3/(int(len(ballot)))*100),3)}% ({counter_c3})"])
-    csvwriter.writerow(["----------------------------"])
-    csvwriter.writerow([f"Winner: {max(election_results, key=election_results.get)}"])
+    for line in output_lines:
+        txtoutput.write(line)
+        txtoutput.write('\n')

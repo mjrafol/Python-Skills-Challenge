@@ -72,20 +72,13 @@ print(f"Greatest Increase in Profits: {date[maxpl_index]} (${(max(change_list))}
 # Greatest decrease in profits (date and amount) over the entire period.
 print(f"Greatest Decrease in Profits: {date[minpl_index]} (${(min(change_list))})")
 
-# Set path for the output csv file.
-output_path = os.path.join('Analysis','PyBank_output.csv')
+# Create a list for the analysis result requirements to be printed in output text file.
+output_lines = ["Financial Analysis", "----------------------------", f"Total Months: {int(len(month))}", f"Total: ${(total)}", f"Average Change: ${round(((pl_totalchange-first_pdchange)/(int(len(month))-1)),2)}", f"Greatest Increase in Profits: {date[maxpl_index]} (${(max(change_list))})", f"Greatest Decrease in Profits: {date[minpl_index]} (${(min(change_list))})"]
 
-# Export a text file with the analysis table.
-with open (output_path,'w') as csvoutput:
-
-    # Initialize csvoutput writer.
-    csvwriter = csv.writer(csvoutput,delimiter=',')
+# Export a text file with the analysis results in designated path.
+with open (os.path.join('Analysis','PyBank_output.txt'),'w') as txtoutput:
 
     # Write the analysis results.
-    csvwriter.writerow(["Financial Analysis"])
-    csvwriter.writerow(["----------------------------"])
-    csvwriter.writerow([f"Total Months: {int(len(month))}"])
-    csvwriter.writerow([f"Total: ${(total)}"])
-    csvwriter.writerow([f"Average Change: ${round(((pl_totalchange-first_pdchange)/(int(len(month))-1)),2)}"])
-    csvwriter.writerow([f"Greatest Increase in Profits: {date[maxpl_index]} (${(max(change_list))})"])
-    csvwriter.writerow([f"Greatest Decrease in Profits: {date[minpl_index]} (${(min(change_list))})"])
+    for line in output_lines:
+        txtoutput.write(line)
+        txtoutput.write('\n')
