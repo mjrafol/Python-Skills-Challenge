@@ -70,7 +70,7 @@ print("----------------------------")
 
 # Winner.
 print(f"Winner: {max(election_results, key=election_results.get)}")
-
+print("----------------------------")
 
 # Create a list for the analysis result requirements to be printed in output text file.
 output_lines = ["Election Results", 
@@ -81,7 +81,8 @@ output_lines = ["Election Results",
     f"{candidates[1]} : {round((counter_c2/(int(len(ballot)))*100),3)}% ({counter_c2})",
     f"{candidates[2]} : {round((counter_c3/(int(len(ballot)))*100),3)}% ({counter_c3})",
     "----------------------------",
-    f"Winner: {max(election_results, key=election_results.get)}"]
+    f"Winner: {max(election_results, key=election_results.get)}",
+    "----------------------------"]
 
 # Export a text file with the analysis results in designated path.
 with open (os.path.join('Analysis','PyPoll_output.txt'),'w') as txtoutput:
